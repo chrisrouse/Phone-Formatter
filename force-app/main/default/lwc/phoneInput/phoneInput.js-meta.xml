@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Phone Input with Extension</masterLabel>
+    <description>International phone number input with optional extension</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="label" type="String" default="Phone Number" label="Label" required="true"/>
+            <property name="required" type="Boolean" default="false" label="Required"/>
+            <property name="disabled" type="Boolean" default="false" label="Disabled"/>
+            <property name="defaultValue" type="String" label="Default Phone Number" description="Existing phone number to pre-populate"/>
+            <property name="enableExtension" type="Boolean" default="false" label="Enable Extension Field" description="Enable extension input field"/>
+            <property name="extensionRequired" type="Boolean" default="false" label="Extension Required"/>
+            <property name="value" type="String" label="Formatted Phone Number" description="Phone number with formatting" role="outputOnly"/>
+            <property name="sanitizedValue" type="String" label="Clean Phone Number" description="Phone number without formatting" role="outputOnly"/>
+            <property name="extension" type="String" label="Extension Value" role="outputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

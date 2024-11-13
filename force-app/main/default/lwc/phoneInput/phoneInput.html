@@ -1,0 +1,80 @@
+<!-- phoneInput.html -->
+<template>
+    <div class="slds-form-element" data-id="phone-input-container">
+        <div class={containerClass}>
+            <div class={phoneColumnClass}>
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="phone-input">
+                        <template if:true={required}>
+                            <abbr class="slds-required" title="required">*</abbr>
+                        </template>
+                        {label}
+                    </label>
+                    <div class="slds-form-element__control">
+                        <div class="slds-combobox_container">
+                            <div class="slds-input-has-icon slds-input-has-icon_left">
+                                <!-- Country Selector -->
+                                <div class="country-selector" onclick={toggleDropdown}>
+                                    <span class="country-flag">{selectedCountry.flag}</span>
+                                    <span class="country-code">{selectedCountry.dialCode}</span>
+                                </div>
+                                <!-- Phone Input -->
+                                <input 
+                                    type="tel" 
+                                    id="phone-input"
+                                    class="slds-input phone-input"
+                                    disabled={disabled}
+                                    oninput={handleInput}
+                                    placeholder="Enter phone number"
+                                />
+                                <!-- Dropdown -->
+                                <div class={dropdownClass} onblur={handleBlur}>
+                                    <ul class="slds-dropdown__list" role="listbox">
+                                        <template for:each={countries} for:item="country">
+                                            <li key={country.code} class={country.orderClass} role="option">
+                                                <button class="slds-button slds-button_reset country-option" 
+                                                        onclick={handleCountrySelect} 
+                                                        data-code={country.code}>
+                                                    <span class="country-flag">{country.flag}</span>
+                                                    <span class="country-name">{country.name}</span>
+                                                    <span class="country-code">{country.dialCode}</span>
+                                                </button>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extension section - only show if enabled -->
+            <template if:true={enableExtension}>
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="extension-input">
+                            <template if:true={extensionRequired}>
+                                <abbr class="slds-required" title="required">*</abbr>
+                            </template>
+                            Extension
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input 
+                                type="tel" 
+                                id="extension-input"
+                                class="slds-input extension-input"
+                                disabled={disabled}
+                                oninput={handleExtensionInput}
+                                placeholder="Enter extension"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+        
+        <!-- Error Messages -->
+        <div if:true={errorMessage} class="slds-form-element__help error-message" role="alert">{errorMessage}</div>
+    </div>
+</template>
